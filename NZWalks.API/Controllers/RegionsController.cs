@@ -6,7 +6,7 @@ using NZWalks.API.Repositories;
 
 namespace NZWalks.API.Controllers
 {
-    // https:localhost:portnumber/api/regions
+    // /api/regions
     [Route("api/[controller]")]
     [ApiController]
     public class RegionsController : ControllerBase
@@ -21,8 +21,8 @@ namespace NZWalks.API.Controllers
             this.mapper = mapper;
         }
 
-        // GET ALL REGIONS
-        // GET: https:localhost:portnumber/api/regions
+        // ALL REGIONS
+        // GET: /api/regions
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -33,8 +33,8 @@ namespace NZWalks.API.Controllers
             return Ok(mapper.Map<List<RegionDto>>(regionsDomain));
         }
 
-        // GET SINGLE REGION(Get Region by ID)
-        // GET: https:localhost:portnumber/api/regions/{id}
+        // SINGLE REGION(Get Region by ID)
+        // GET: /api/regions/{id}
         [HttpGet]
         [Route("{id:Guid}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
@@ -51,8 +51,8 @@ namespace NZWalks.API.Controllers
             return Ok(mapper.Map<RegionDto>(regionDomain));
         }
 
-        // POST To Create Region
-        // POST https:localhost:portnumber/api/regions
+        // To Create Region
+        // POST /api/regions
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AddRegionRequestDto regionCreateDto)
         {
@@ -69,7 +69,7 @@ namespace NZWalks.API.Controllers
         }
 
         // Update Region
-        // PUT: https:localhost:portnumber/api/regions/{id}
+        // PUT: /api/regions/{id}
         [HttpPut]
         [Route("{id:Guid}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
@@ -89,7 +89,7 @@ namespace NZWalks.API.Controllers
         }
 
         // Delete Region
-        // DELETE: https:localhost:portnumber/api/regions/{id}
+        // DELETE: /api/regions/{id}
         [HttpDelete]
         [Route("{id:Guid}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
