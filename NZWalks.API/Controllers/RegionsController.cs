@@ -9,8 +9,10 @@ using NZWalks.API.Repositories;
 namespace NZWalks.API.Controllers
 {
     // /api/regions
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class RegionsController : ControllerBase
     {
         private readonly IRegionRepository regionRepository;
@@ -27,6 +29,7 @@ namespace NZWalks.API.Controllers
         // GET: /api/regions
         [HttpGet]
         [Authorize(Roles = "Reader,Writer")]
+        [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetAll()
         {
             // Get Data From Database - Domain models
@@ -34,6 +37,20 @@ namespace NZWalks.API.Controllers
 
             // Return DTOs
             return Ok(mapper.Map<List<RegionDto>>(regionsDomain));
+        }
+
+        // ALL REGIONS
+        // GET: /api/regions
+        [HttpGet]
+        [Authorize(Roles = "Reader,Writer")]
+        [MapToApiVersion("2.0")]
+        public async Task<IActionResult> GetAllV2()
+        {
+            // Get Data From Database - Domain models
+            var regionsDomain = await regionRepository.GetAllAsync();
+
+            // Return DTOs
+            return Ok(mapper.Map<List<RegionDtoV2>>(regionsDomain));
         }
 
         // SINGLE REGION(Get Region by ID)
