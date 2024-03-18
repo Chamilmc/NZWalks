@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NZWalks.UI.Models;
 using NZWalks.UI.Models.DTO;
-using System.Net.Http;
-using System.Reflection;
 using System.Text;
 using System.Text.Json;
-using static System.Net.WebRequestMethods;
 
 namespace NZWalks.UI.Controllers
 {
